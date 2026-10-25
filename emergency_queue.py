@@ -9,13 +9,13 @@ class MinHeap:
 
     def heapify_up(self, index):
         while index > 0:
-        # Find the current patient's parent
+            # Find the current patient's parent
             parent_index = (index - 1) // 2
-            current_task = self.data[index] 
+            current_patient = self.data[index] 
             parent_patient = self.data[parent_index]
 
             # A lower urgency score moves toward the root
-            if current_task.urgency < parent_patient.urgency:
+            if current_patient.urgency < parent_patient.urgency:
                 # Swap the patient with their parent 
                 temp = self.data[index]
                 self.data[index] = self.data[parent_index]
@@ -32,7 +32,7 @@ class MinHeap:
         right = 2 * index + 2
         smallest = index 
 
-        # Check the left child with the current smallest score
+        # Compare the left child with the current smallest score
         if (left < len(self.data) and self.data[left].urgency < self.data[smallest].urgency):
             smallest = left
 
@@ -60,7 +60,7 @@ class MinHeap:
             print(f"-{patient.name} (Urgency: {patient.urgency})")
 
     def peek(self):
-    # An empty heap has no next patient
+        # An empty heap has no next patient
         if not self.data:
             return None
 
@@ -153,7 +153,7 @@ assert heap.peek() is None
 print("\nAll edge-case tests passed!")
 
 
-# Memo Design
+# Design Memo
 
 # Trees are appropriate for doctor structure, or any employee reporting structure, since it preserves management relationships and 
 # lets software traverse an entire reporting branch. This is decidedly different from a queue, like the emergency_queue.py, which 
@@ -161,9 +161,10 @@ print("\nAll edge-case tests passed!")
 # each node. With our binary tree, each node had at most two children.
 
 # Preorder (root, left, right): Processing a parent before its children. Software could display a manager before listing who reports to them.
-# Inorder (left, root, right): Useful when retrieving sorted information from a binary tree. In doctor_tree.py, this order gives us the reporting structure.
+# Inorder (left, root, right): Useful when retrieving sorted information from a binary search tree. Out doctor_tree.py is arranged by reporting relationships, so this 
+# traversal does not automatically produce alphabetical order.
 # Postorder (left, right, root): Useful for processing children before parent. Could be used to delete folder contents before deleting 
-# the folder, or combining totals of a departments before combining them into a store wide total.
+# the folder, or calculating totals of a departments before combining them into a store wide total.
 
 # Heaps are a type of binary tree that allow you to implement a priority queue. Emergency intakes and task lists are great examples of where heaps 
 # are implemented. Each patient has an urgency score, and the heap keeps the patient with the lowest score at the root. As patients arrive or are served, 

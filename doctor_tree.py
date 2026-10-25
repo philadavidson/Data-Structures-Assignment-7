@@ -1,6 +1,6 @@
 class DoctorNode:
     def __init__(self, name):
-        self.value = name
+        self.name = name
         self.left = None
         self.right = None
 
@@ -26,7 +26,7 @@ class DoctorTree:
             current_node = self.root
 
         # Attach the new doctor when the parent is found
-        if current_node.value == parent_name:
+        if current_node.name == parent_name:
             if side == "left":
                 if current_node.left is not None:
                     print("Left report already exists.")
@@ -61,7 +61,7 @@ class DoctorTree:
             return []
 
         # Visit current doctor, then left and right subtrees
-        result = [node.value]
+        result = [node.name]
         result += self.preorder(node.left)
         result += self.preorder(node.right)
         return result
@@ -70,10 +70,10 @@ class DoctorTree:
         if node is None: 
             return []
  
-        # Visit the subtree, current doctor, then right subtree
+        # Visit the left subtree, current doctor, then right subtree
         result = []
         result += self.inorder(node.left)
-        result.append(node.value)
+        result.append(node.name)
         result += self.inorder(node.right)
         return result
 
@@ -85,7 +85,7 @@ class DoctorTree:
         result = []
         result += self.postorder(node.left)
         result += self.postorder(node.right)
-        result.append(node.value)
+        result.append(node.name)
         return result
 
 # Test your DoctorTree and DoctorNode classes here
